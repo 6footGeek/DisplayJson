@@ -5,10 +5,10 @@ import pandas as pd
 
 
 def display_json():
-    # pwned = pd.read_json('/caitlinroan@hotmail.com/pwned.json', orient='index')
+    # pwned = pd.read_json('/pwned.json', orient='index')
     # print pwned
     print "hello"
-    with open("caitlinroan@hotmail.com/pwned.json") as pwned:
+    with open("/pwned.json") as pwned:
         d = json.load(pwned)
         pwncount = d.get('PwnCount', '')
         site = d.get('Title', '')
@@ -20,7 +20,7 @@ def display_json():
 
     # pwned_df = pd.DataFrame()
     # count = 0;
-    # for l in open("caitlinroan@hotmail.com/pwned.json"):
+    # for l in open("/pwned.json"):
     #     try:
     #         count += 1
     #         if (count == 20001):
