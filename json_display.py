@@ -1,42 +1,22 @@
 import json
 import pandas as pd
 
+def setup_terminal():
+    pd.set_option('display.height', 1000)
+    pd.set_option('display.width', 1000)
+    pd.set_option('display.max_rows', 500)
+    pd.set_option('display.max_columns', 10)
+    pd.set_option('display.max_colwidth', 80)
 
-
-
-def display_json():
-    # pwned = pd.read_json('/pwned.json', orient='index')
-    # print pwned
-    print "hello"
-    with open("/pwned.json") as pwned:
-        d = json.load(pwned)
-        pwncount = d.get('PwnCount', '')
-        site = d.get('Title', '')
-        date = d.get('BreachDate', '')
-        description = d.get('Description', '')
-        classes = d.get ('DataClasses', '')
-    df = pd.DataFrame([pwncount, site, date, description, classes]).T
-
-
-    # pwned_df = pd.DataFrame()
-    # count = 0;
-    # for l in open("/pwned.json"):
-    #     try:
-    #         count += 1
-    #         if (count == 20001):
-    #             break
-    #         obj1 = json.loads(l)
-    #         df1 = pd.DataFrame(obj1, index=[0])
-    #         pwned_df = pwned_df.append(df1, ignore_index=True)
-    #     except ValueError:
-    #         line = line.replace('\\', '')
-    #         obj = json.loads(line)
-    #         df1 = pd.DataFrame(obj, index=[0])
-    #         pwned_df = pwned_df.append(df1, ignore_index=True)
-
-
+def display_table():
+    getJSON = pd.read_json('pwned.json', orient='index')
+    table = pd.DataFrame(getJSON).T
+    table = table[['Domain', 'BreachDate', 'PwnCount', 'Description']]
+    table.set_index('Domain', inplace=True)
+    print table
 
 def main():
-    display_json()
+    setup_terminal()
+    display_table()
 
 main()
